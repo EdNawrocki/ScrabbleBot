@@ -153,7 +153,7 @@ if __name__ == "__main__":
         draw_board()
         if p.DrawTiles():
             draw_rack(p.rack)
-            time.sleep(1)
+            time.sleep(5)
             p.Move()
             print(p.score)
         elif len(p.rack) != 0:
@@ -161,4 +161,23 @@ if __name__ == "__main__":
             time.sleep(1)
             p.Move()
             print(p.score)
+    #For running games
+    num_iters = 100
+    sum = 0.0
+    num_moves = 0.0
+    for _ in range(num_iters):
+        b = GameBoard()
+        t = TileBag()
+        p = Player(b, t)
+        while len(t.AvailableLetters) != 0:
+            p.DrawTiles()
+            p.Move()
+        if _ % 10 == 0:
+            print(p.score)
+        sum += p.score
+        num_moves += p.turns
+    print("Average Score:",sum/num_iters)
+    print("Average Score per move:", sum/num_moves)
+    
+    
         
